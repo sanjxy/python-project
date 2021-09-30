@@ -1,0 +1,32 @@
+# Step 1: Import the english.txt file
+
+import json
+
+english_text = open('/home/jovyan/english_to_lolspeak_fellow/english.txt', 'r')
+
+text = english_text.readlines()
+
+english_text.close()
+
+# Step 2: Import the glossary (the tranzlashun.json file)
+
+with open('/home/jovyan/english_to_lolspeak_fellow/tranzlashun.json') as translationFile:
+    data = json.load(translationFile)
+# Step 3:Translate the English text into Lolspeak
+
+translated_text= ''
+
+for line in text:
+    for word in line.split():
+        if word in data:
+            translated_text += data[word.lower()]+" "
+        else:
+            translated_text += word.lower()+ " "
+pass
+# Step 4 :Save the translated text as the "lolcat.txt" file
+
+with open('/home/jovyan/english_to_lolspeak_fellow/lolcat.txt', 'w') as lolcat_file:
+
+    lolcat_file.write(translated_text)
+
+lolcat_file.close()
